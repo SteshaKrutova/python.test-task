@@ -1,0 +1,25 @@
+
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://user:password@db:5432/mydb
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - db
+      - redis
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
+  redis:
+    image: redis:6.2
+  worker:
+    build: .
+    command: celery -A api.tasks.celery_app worker --loglevel=info
+    depends_on:
+      - redis
