@@ -138,7 +138,6 @@ device-analytics/
 │   └── locustfile.py     # Нагрузочное тестирование Locust
 ├── docker-compose.yml    # Конфигурация Docker Compose
 ├── requirements.txt      # Зависимости Python
-└── README.md             # Документация проекта
 ```
 
 ---
